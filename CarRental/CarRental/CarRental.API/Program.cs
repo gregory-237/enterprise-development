@@ -2,6 +2,7 @@ using CarRental.Application.Contracts;
 using CarRental.Domain.Data;
 using CarRental.Domain.Entities;
 using CarRental.Domain.Interfaces;
+using CarRental.Infrastructure.Messaging;
 using CarRental.Infrastructure.Persistence;
 using CarRental.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,10 @@ builder.Services.AddScoped<IRepository<Client>,          DbRepository<Client>>()
 builder.Services.AddScoped<IRepository<CarModel>,        DbRepository<CarModel>>();
 builder.Services.AddScoped<IRepository<ModelGeneration>, DbRepository<ModelGeneration>>();
 builder.Services.AddScoped<IRepository<Rental>,          DbRepository<Rental>>();
+
+// Регистрация RabbitMQ-соединения и фонового потребителя
+builder.AddRabbitMQClient("carrental-rabbitmq");
+builder.Services.AddHostedService<RentalQueueConsumer>();
 
 var app = builder.Build();
 
