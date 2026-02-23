@@ -21,6 +21,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, CarRentalFixtu
         modelBuilder.Entity<ModelGeneration>(e =>
         {
             e.HasKey(mg => mg.Id);
+            e.Property(mg => mg.RentalPricePerHour).HasColumnType("decimal(18,2)");
             e.HasOne(mg => mg.Model)
              .WithMany()
              .HasForeignKey(mg => mg.ModelId)

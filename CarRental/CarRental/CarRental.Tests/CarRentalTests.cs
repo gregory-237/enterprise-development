@@ -1,4 +1,5 @@
 using CarRental.Domain.Data;
+using Xunit;
 
 namespace CarRental.Tests;
 
@@ -6,8 +7,16 @@ namespace CarRental.Tests;
 /// Юнит-тесты для пункта проката автомобилей.
 /// Петров Григорий Алексеевич, группа 6413-100503D
 /// </summary>
-public class CarRentalTests(CarRentalFixture fixture) : IClassFixture<CarRentalFixture>
+public class CarRentalTests : IClassFixture<CarRentalFixture>
 {
+    private readonly CarRentalFixture fixture;
+
+    public CarRentalTests(CarRentalFixture fixture)
+    {
+        this.fixture = fixture;
+        fixture.WireNavigations();
+    }
+
     /// <summary>
     /// ТЕСТ 1: Вывести информацию обо всех клиентах,
     /// которые брали в аренду автомобили указанной модели, упорядочить по ФИО.

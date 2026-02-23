@@ -114,5 +114,25 @@ public class CarRentalFixture
             new() { Id = 18, CarId = 14, ClientId = 3,  RentalDate = new DateTime(2025, 2, 12, 10, 10, 0), RentalHours = 36  },
             new() { Id = 19, CarId = 15, ClientId = 4,  RentalDate = new DateTime(2025, 2, 16, 13, 30, 0), RentalHours = 84  },
         ];
+
+    }
+
+    /// <summary>
+    /// Связывает навигационные свойства для использования в in-memory LINQ-запросах (тесты).
+    /// НЕ вызывать при передаче данных в EF Core HasData.
+    /// </summary>
+    public void WireNavigations()
+    {
+        foreach (var mg in ModelGenerations)
+            mg.Model = CarModels.First(m => m.Id == mg.ModelId);
+
+        foreach (var car in Cars)
+            car.ModelGeneration = ModelGenerations.First(mg => mg.Id == car.ModelGenerationId);
+
+        foreach (var rental in Rentals)
+        {
+            rental.Car    = Cars.First(c => c.Id == rental.CarId);
+            rental.Client = Clients.First(c => c.Id == rental.ClientId);
+        }
     }
 }

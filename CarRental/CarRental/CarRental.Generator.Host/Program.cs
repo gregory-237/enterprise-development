@@ -9,6 +9,12 @@ builder.AddRabbitMQClient("carrental-rabbitmq");
 
 builder.Services.AddScoped<RentalPublisher>();
 
+// HTTP-клиент для запросов к CarRental API (Aspire service discovery)
+builder.Services.AddHttpClient("carrental-api", c =>
+{
+    c.BaseAddress = new Uri("https+http://carrental-api");
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

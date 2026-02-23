@@ -7,17 +7,19 @@ var sqlServer = builder.AddSqlServer("carrental-sql")
 var rabbitMq = builder.AddRabbitMQ("carrental-rabbitmq")
                       .WithManagementPlugin();
 
-builder.AddProject<Projects.CarRental_API>("carrental-api")
-       .WithReference(sqlServer, "DefaultConnection")
-       .WithReference(rabbitMq)
-       .WithEnvironment("RabbitMQ__ExchangeName", "rental-exchange")
-       .WithEnvironment("RabbitMQ__QueueName",    "rental-queue")
-       .WaitFor(sqlServer)
-       .WaitFor(rabbitMq);
+var api = builder.AddProject<Projects.CarRental_API>("carrental-api")
+                 .WithReference(sqlServer, "DefaultConnection")
+                 .WithReference(rabbitMq)
+                 .WithEnvironment("RabbitMQ__ExchangeName", "rental-exchange")
+                 .WithEnvironment("RabbitMQ__QueueName",    "rental-queue")
+                 .WaitFor(sqlServer)
+                 .WaitFor(rabbitMq);
 
 builder.AddProject<Projects.CarRental_Generator_Host>("carrental-generator")
        .WithReference(rabbitMq)
+       .WithReference(api)
        .WithEnvironment("RabbitMQ__ExchangeName", "rental-exchange")
-       .WaitFor(rabbitMq);
+       .WaitFor(rabbitMq)
+       .WaitFor(api);
 
 builder.Build().Run();

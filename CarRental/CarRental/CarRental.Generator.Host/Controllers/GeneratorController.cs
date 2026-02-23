@@ -2,6 +2,7 @@ using CarRental.Application.Contracts.Dto;
 using CarRental.Generator.Host.Generator;
 using CarRental.Generator.Host.Messaging;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Json;
 
 namespace CarRental.Generator.Host.Controllers;
 
@@ -10,15 +11,18 @@ namespace CarRental.Generator.Host.Controllers;
 /// Генерирует тестовые данные и публикует их в RabbitMQ.
 /// </summary>
 /// <param name="publisher">Публикатор сообщений RabbitMQ</param>
+/// <param name="httpClientFactory">Фабрика HTTP-клиентов для запросов к API</param>
 /// <param name="logger">Логгер</param>
 [ApiController]
 [Route("api/[controller]")]
 public class GeneratorController(
     RentalPublisher publisher,
+    IHttpClientFactory httpClientFactory,
     ILogger<GeneratorController> logger) : ControllerBase
 {
     /// <summary>
-    /// Сгенерировать договоры и отправить их в RabbitMQ пакетами
+    /// Сгенерировать договоры и отправить их в RabbitMQ пакетами.
+    /// Идентификаторы автомобилей и клиентов берутся из базы данных через API.
     /// </summary>
     /// <param name="totalCount">Общее количество генерируемых DTO</param>
     /// <param name="batchSize">Размер одного пакета</param>
@@ -45,7 +49,25 @@ public class GeneratorController(
 
         try
         {
-            var items = RentalGenerator.Generate(totalCount);
+            var http = httpClientFactory.CreateClient("carrental-api");
+
+            var cars = await http.GetFromJsonAsync<IList<CarGetDto>>(
+                "/api/Cars", cancellationToken);
+            var clients = await http.GetFromJsonAsync<IList<ClientGetDto>>(
+                "/api/Clients", cancellationToken);
+
+            if (cars is null || cars.Count == 0)
+                return BadRequest("Не удалось получить список автомобилей из API");
+            if (clients is null || clients.Count == 0)
+                return BadRequest("Не удалось получить список клиентов из API");
+
+            var carIds    = cars.Select(c => c.Id).ToList();
+            var clientIds = clients.Select(c => c.Id).ToList();
+
+            logger.LogInformation("Fetched {cars} cars and {clients} clients from API",
+                carIds.Count, clientIds.Count);
+
+            var items = RentalGenerator.Generate(totalCount, carIds, clientIds);
 
             foreach (var chunk in items.Chunk(batchSize))
             {

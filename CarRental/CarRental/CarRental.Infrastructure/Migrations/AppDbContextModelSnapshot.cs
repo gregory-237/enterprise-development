@@ -23,104 +23,310 @@ namespace CarRental.Infrastructure.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("CarRental.Domain.Entities.Car", b =>
-            {
-                b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int").HasColumnName("id");
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                b.Property<string>("Color").IsRequired().HasMaxLength(30).HasColumnType("nvarchar(30)").HasColumnName("color");
-                b.Property<string>("LicensePlate").IsRequired().HasMaxLength(20).HasColumnType("nvarchar(20)").HasColumnName("license_plate");
-                b.Property<int>("ModelGenerationId").HasColumnType("int").HasColumnName("model_generation_id");
-                b.HasKey("Id");
-                b.HasIndex("ModelGenerationId");
-                b.ToTable("cars");
-            });
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("color");
+
+                    b.Property<string>("LicensePlate")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("license_plate");
+
+                    b.Property<int>("ModelGenerationId")
+                        .HasColumnType("int")
+                        .HasColumnName("model_generation_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModelGenerationId");
+
+                    b.ToTable("cars");
+
+                    b.HasData(
+                        new { Id = 1,  Color = "Black",  LicensePlate = "A001MB77",  ModelGenerationId = 1  },
+                        new { Id = 2,  Color = "White",  LicensePlate = "B222NO77",  ModelGenerationId = 2  },
+                        new { Id = 3,  Color = "Silver", LicensePlate = "C333RT99",  ModelGenerationId = 3  },
+                        new { Id = 4,  Color = "Blue",   LicensePlate = "E444UF77",  ModelGenerationId = 4  },
+                        new { Id = 5,  Color = "Red",    LicensePlate = "K555FH77",  ModelGenerationId = 5  },
+                        new { Id = 6,  Color = "Gray",   LicensePlate = "M666HC99",  ModelGenerationId = 6  },
+                        new { Id = 7,  Color = "White",  LicensePlate = "N777CH77",  ModelGenerationId = 7  },
+                        new { Id = 8,  Color = "Brown",  LicensePlate = "O888SH77",  ModelGenerationId = 8  },
+                        new { Id = 9,  Color = "Yellow", LicensePlate = "P999SH99",  ModelGenerationId = 9  },
+                        new { Id = 10, Color = "Black",  LicensePlate = "R100SE77",  ModelGenerationId = 10 },
+                        new { Id = 11, Color = "Green",  LicensePlate = "S200EY77",  ModelGenerationId = 11 },
+                        new { Id = 12, Color = "White",  LicensePlate = "T300YA99",  ModelGenerationId = 12 },
+                        new { Id = 13, Color = "Black",  LicensePlate = "U400AB77",  ModelGenerationId = 13 },
+                        new { Id = 14, Color = "Gray",   LicensePlate = "H500BV99",  ModelGenerationId = 14 },
+                        new { Id = 15, Color = "Beige",  LicensePlate = "SH600VG77", ModelGenerationId = 15 });
+                });
 
             modelBuilder.Entity("CarRental.Domain.Entities.CarModel", b =>
-            {
-                b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int").HasColumnName("id");
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                b.Property<string>("BodyType").IsRequired().HasMaxLength(30).HasColumnType("nvarchar(30)").HasColumnName("body_type");
-                b.Property<string>("Class").IsRequired().HasMaxLength(30).HasColumnType("nvarchar(30)").HasColumnName("class");
-                b.Property<string>("DriveType").IsRequired().HasMaxLength(10).HasColumnType("nvarchar(10)").HasColumnName("drive_type");
-                b.Property<string>("Name").IsRequired().HasMaxLength(100).HasColumnType("nvarchar(100)").HasColumnName("name");
-                b.Property<int>("SeatsCount").HasColumnType("int").HasColumnName("seats_count");
-                b.HasKey("Id");
-                b.ToTable("car_models");
-            });
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BodyType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("body_type");
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("class");
+
+                    b.Property<string>("DriveType")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("drive_type");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("SeatsCount")
+                        .HasColumnType("int")
+                        .HasColumnName("seats_count");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("car_models");
+
+                    b.HasData(
+                        new { Id = 1,  BodyType = "Sedan", Class = "Premium",    DriveType = "RWD", Name = "Mercedes C-Class",     SeatsCount = 5 },
+                        new { Id = 2,  BodyType = "Sedan", Class = "Business",   DriveType = "FWD", Name = "Volkswagen Passat",    SeatsCount = 5 },
+                        new { Id = 3,  BodyType = "Sedan", Class = "Economy",    DriveType = "FWD", Name = "Kia Rio",              SeatsCount = 5 },
+                        new { Id = 4,  BodyType = "SUV",   Class = "Mid-size",   DriveType = "AWD", Name = "Toyota RAV4",          SeatsCount = 5 },
+                        new { Id = 5,  BodyType = "Coupe", Class = "Supercar",   DriveType = "RWD", Name = "Ferrari 488",          SeatsCount = 2 },
+                        new { Id = 6,  BodyType = "SUV",   Class = "Full-size",  DriveType = "4WD", Name = "Nissan Patrol",        SeatsCount = 7 },
+                        new { Id = 7,  BodyType = "Sedan", Class = "Economy",    DriveType = "FWD", Name = "Renault Logan",        SeatsCount = 5 },
+                        new { Id = 8,  BodyType = "SUV",   Class = "Mid-size",   DriveType = "AWD", Name = "Mazda CX-5",           SeatsCount = 5 },
+                        new { Id = 9,  BodyType = "Van",   Class = "Commercial", DriveType = "RWD", Name = "Ford Transit",         SeatsCount = 3 },
+                        new { Id = 10, BodyType = "SUV",   Class = "Mid-size",   DriveType = "AWD", Name = "Mitsubishi Outlander", SeatsCount = 5 },
+                        new { Id = 11, BodyType = "SUV",   Class = "Luxury",     DriveType = "4WD", Name = "Land Rover Defender",  SeatsCount = 5 },
+                        new { Id = 12, BodyType = "SUV",   Class = "Premium",    DriveType = "AWD", Name = "Volvo XC60",           SeatsCount = 5 },
+                        new { Id = 13, BodyType = "SUV",   Class = "Luxury",     DriveType = "AWD", Name = "Cadillac Escalade",    SeatsCount = 7 },
+                        new { Id = 14, BodyType = "Sedan", Class = "Business",   DriveType = "FWD", Name = "Skoda Octavia",        SeatsCount = 5 },
+                        new { Id = 15, BodyType = "SUV",   Class = "Off-road",   DriveType = "4WD", Name = "Niva Legend",          SeatsCount = 5 });
+                });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Client", b =>
-            {
-                b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int").HasColumnName("id");
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                b.Property<DateOnly>("BirthDate").HasColumnType("date").HasColumnName("birth_date");
-                b.Property<string>("FullName").IsRequired().HasMaxLength(150).HasColumnType("nvarchar(150)").HasColumnName("full_name");
-                b.Property<string>("LicenseNumber").IsRequired().HasMaxLength(20).HasColumnType("nvarchar(20)").HasColumnName("license_number");
-                b.HasKey("Id");
-                b.ToTable("clients");
-            });
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateOnly>("BirthDate")
+                        .HasColumnType("date")
+                        .HasColumnName("birth_date");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnName("full_name");
+
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("license_number");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("clients");
+
+                    b.HasData(
+                        new { Id = 1,  BirthDate = new DateOnly(1985,  3, 20), FullName = "Vasily Nekrasov",     LicenseNumber = "2025-011" },
+                        new { Id = 2,  BirthDate = new DateOnly(1990,  7, 15), FullName = "Irina Morozova",      LicenseNumber = "2025-022" },
+                        new { Id = 3,  BirthDate = new DateOnly(1988, 11,  5), FullName = "Sergei Volkov",       LicenseNumber = "2025-033" },
+                        new { Id = 4,  BirthDate = new DateOnly(1992,  5, 28), FullName = "Natalia Stepanova",   LicenseNumber = "2025-044" },
+                        new { Id = 5,  BirthDate = new DateOnly(1978,  9, 12), FullName = "Alexei Nikitin",      LicenseNumber = "2025-055" },
+                        new { Id = 6,  BirthDate = new DateOnly(1995,  2,  3), FullName = "Yulia Borisova",      LicenseNumber = "2025-066" },
+                        new { Id = 7,  BirthDate = new DateOnly(1983,  8, 25), FullName = "Dmitry Kirillov",     LicenseNumber = "2025-077" },
+                        new { Id = 8,  BirthDate = new DateOnly(1997, 12, 18), FullName = "Vera Sorokina",       LicenseNumber = "2025-088" },
+                        new { Id = 9,  BirthDate = new DateOnly(1986,  6, 30), FullName = "Konstantin Zhukov",   LicenseNumber = "2025-099" },
+                        new { Id = 10, BirthDate = new DateOnly(1993,  4,  7), FullName = "Polina Veselova",     LicenseNumber = "2025-100" },
+                        new { Id = 11, BirthDate = new DateOnly(1980, 10, 14), FullName = "Nikolai Kuznetsov",   LicenseNumber = "2025-111" },
+                        new { Id = 12, BirthDate = new DateOnly(1998,  1, 22), FullName = "Ekaterina Savelyeva", LicenseNumber = "2025-122" },
+                        new { Id = 13, BirthDate = new DateOnly(1975,  7,  9), FullName = "Andrei Kotov",        LicenseNumber = "2025-133" },
+                        new { Id = 14, BirthDate = new DateOnly(1982,  3, 16), FullName = "Valentina Osipova",   LicenseNumber = "2025-144" },
+                        new { Id = 15, BirthDate = new DateOnly(1999, 11,  1), FullName = "Maxim Panin",         LicenseNumber = "2025-155" });
+                });
 
             modelBuilder.Entity("CarRental.Domain.Entities.ModelGeneration", b =>
-            {
-                b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int").HasColumnName("id");
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                b.Property<double>("EngineVolume").HasColumnType("float").HasColumnName("engine_volume");
-                b.Property<int>("ModelId").HasColumnType("int").HasColumnName("model_id");
-                b.Property<decimal>("RentalPricePerHour").HasColumnType("decimal(18,2)").HasColumnName("rental_price_per_hour");
-                b.Property<string>("Transmission").IsRequired().HasMaxLength(10).HasColumnType("nvarchar(10)").HasColumnName("transmission");
-                b.Property<int>("Year").HasColumnType("int").HasColumnName("year");
-                b.HasKey("Id");
-                b.HasIndex("ModelId");
-                b.ToTable("model_generations");
-            });
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("EngineVolume")
+                        .HasColumnType("float")
+                        .HasColumnName("engine_volume");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int")
+                        .HasColumnName("model_id");
+
+                    b.Property<decimal>("RentalPricePerHour")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("rental_price_per_hour");
+
+                    b.Property<string>("Transmission")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("transmission");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int")
+                        .HasColumnName("year");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("model_generations");
+
+                    b.HasData(
+                        new { Id = 1,  EngineVolume = 2.0, ModelId = 1,  RentalPricePerHour = 2500m,  Transmission = "AT",  Year = 2023 },
+                        new { Id = 2,  EngineVolume = 1.8, ModelId = 2,  RentalPricePerHour = 1800m,  Transmission = "AT",  Year = 2022 },
+                        new { Id = 3,  EngineVolume = 1.4, ModelId = 3,  RentalPricePerHour = 900m,   Transmission = "AT",  Year = 2024 },
+                        new { Id = 4,  EngineVolume = 2.5, ModelId = 4,  RentalPricePerHour = 2200m,  Transmission = "AT",  Year = 2023 },
+                        new { Id = 5,  EngineVolume = 3.9, ModelId = 5,  RentalPricePerHour = 15000m, Transmission = "AT",  Year = 2021 },
+                        new { Id = 6,  EngineVolume = 4.0, ModelId = 6,  RentalPricePerHour = 4000m,  Transmission = "AT",  Year = 2023 },
+                        new { Id = 7,  EngineVolume = 1.6, ModelId = 7,  RentalPricePerHour = 800m,   Transmission = "MT",  Year = 2024 },
+                        new { Id = 8,  EngineVolume = 2.0, ModelId = 8,  RentalPricePerHour = 2000m,  Transmission = "AT",  Year = 2024 },
+                        new { Id = 9,  EngineVolume = 2.2, ModelId = 9,  RentalPricePerHour = 1600m,  Transmission = "MT",  Year = 2022 },
+                        new { Id = 10, EngineVolume = 2.0, ModelId = 10, RentalPricePerHour = 1900m,  Transmission = "CVT", Year = 2023 },
+                        new { Id = 11, EngineVolume = 3.0, ModelId = 11, RentalPricePerHour = 7000m,  Transmission = "AT",  Year = 2024 },
+                        new { Id = 12, EngineVolume = 2.0, ModelId = 12, RentalPricePerHour = 3500m,  Transmission = "AT",  Year = 2023 },
+                        new { Id = 13, EngineVolume = 6.2, ModelId = 13, RentalPricePerHour = 5500m,  Transmission = "AT",  Year = 2022 },
+                        new { Id = 14, EngineVolume = 1.5, ModelId = 14, RentalPricePerHour = 1400m,  Transmission = "AT",  Year = 2024 },
+                        new { Id = 15, EngineVolume = 1.7, ModelId = 15, RentalPricePerHour = 950m,   Transmission = "MT",  Year = 2023 });
+                });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Rental", b =>
-            {
-                b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int").HasColumnName("id");
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                b.Property<int>("CarId").HasColumnType("int").HasColumnName("car_id");
-                b.Property<int>("ClientId").HasColumnType("int").HasColumnName("client_id");
-                b.Property<DateTime>("RentalDate").HasColumnType("datetime2").HasColumnName("rental_date");
-                b.Property<int>("RentalHours").HasColumnType("int").HasColumnName("rental_hours");
-                b.HasKey("Id");
-                b.HasIndex("CarId");
-                b.HasIndex("ClientId");
-                b.ToTable("rentals");
-            });
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int")
+                        .HasColumnName("car_id");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int")
+                        .HasColumnName("client_id");
+
+                    b.Property<DateTime>("RentalDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("rental_date");
+
+                    b.Property<int>("RentalHours")
+                        .HasColumnType("int")
+                        .HasColumnName("rental_hours");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("rentals");
+
+                    b.HasData(
+                        new { Id = 1,  CarId = 4,  ClientId = 1,  RentalDate = new DateTime(2025, 3, 4,  10,  0, 0, 0, DateTimeKind.Unspecified), RentalHours = 48  },
+                        new { Id = 2,  CarId = 4,  ClientId = 3,  RentalDate = new DateTime(2025, 2, 25, 14, 30, 0, 0, DateTimeKind.Unspecified), RentalHours = 72  },
+                        new { Id = 3,  CarId = 4,  ClientId = 5,  RentalDate = new DateTime(2025, 2, 20,  9, 15, 0, 0, DateTimeKind.Unspecified), RentalHours = 24  },
+                        new { Id = 4,  CarId = 1,  ClientId = 2,  RentalDate = new DateTime(2025, 2, 27, 11, 45, 0, 0, DateTimeKind.Unspecified), RentalHours = 96  },
+                        new { Id = 5,  CarId = 1,  ClientId = 4,  RentalDate = new DateTime(2025, 3, 1,  16,  0, 0, 0, DateTimeKind.Unspecified), RentalHours = 120 },
+                        new { Id = 6,  CarId = 2,  ClientId = 6,  RentalDate = new DateTime(2025, 2, 23, 13, 20, 0, 0, DateTimeKind.Unspecified), RentalHours = 72  },
+                        new { Id = 7,  CarId = 2,  ClientId = 8,  RentalDate = new DateTime(2025, 2, 18, 10, 10, 0, 0, DateTimeKind.Unspecified), RentalHours = 48  },
+                        new { Id = 8,  CarId = 3,  ClientId = 7,  RentalDate = new DateTime(2025, 2, 28,  8, 30, 0, 0, DateTimeKind.Unspecified), RentalHours = 36  },
+                        new { Id = 9,  CarId = 5,  ClientId = 9,  RentalDate = new DateTime(2025, 3, 3,  12,  0, 0, 0, DateTimeKind.Unspecified), RentalHours = 96  },
+                        new { Id = 10, CarId = 6,  ClientId = 10, RentalDate = new DateTime(2025, 2, 28,  7,  0, 0, 0, DateTimeKind.Unspecified), RentalHours = 168 },
+                        new { Id = 11, CarId = 7,  ClientId = 11, RentalDate = new DateTime(2025, 2, 22, 15, 45, 0, 0, DateTimeKind.Unspecified), RentalHours = 72  },
+                        new { Id = 12, CarId = 8,  ClientId = 12, RentalDate = new DateTime(2025, 2, 26,  9, 20, 0, 0, DateTimeKind.Unspecified), RentalHours = 48  },
+                        new { Id = 13, CarId = 9,  ClientId = 13, RentalDate = new DateTime(2025, 2, 28, 22,  0, 0, 0, DateTimeKind.Unspecified), RentalHours = 60  },
+                        new { Id = 14, CarId = 10, ClientId = 14, RentalDate = new DateTime(2025, 2, 24, 11, 30, 0, 0, DateTimeKind.Unspecified), RentalHours = 96  },
+                        new { Id = 15, CarId = 11, ClientId = 15, RentalDate = new DateTime(2025, 2, 10, 14, 15, 0, 0, DateTimeKind.Unspecified), RentalHours = 120 },
+                        new { Id = 16, CarId = 12, ClientId = 1,  RentalDate = new DateTime(2025, 2, 28, 14,  0, 0, 0, DateTimeKind.Unspecified), RentalHours = 48  },
+                        new { Id = 17, CarId = 13, ClientId = 2,  RentalDate = new DateTime(2025, 2, 5,  16, 45, 0, 0, DateTimeKind.Unspecified), RentalHours = 72  },
+                        new { Id = 18, CarId = 14, ClientId = 3,  RentalDate = new DateTime(2025, 2, 12, 10, 10, 0, 0, DateTimeKind.Unspecified), RentalHours = 36  },
+                        new { Id = 19, CarId = 15, ClientId = 4,  RentalDate = new DateTime(2025, 2, 16, 13, 30, 0, 0, DateTimeKind.Unspecified), RentalHours = 84  });
+                });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Car", b =>
-            {
-                b.HasOne("CarRental.Domain.Entities.ModelGeneration", "ModelGeneration")
-                    .WithMany()
-                    .HasForeignKey("ModelGenerationId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-                b.Navigation("ModelGeneration");
-            });
+                {
+                    b.HasOne("CarRental.Domain.Entities.ModelGeneration", "ModelGeneration")
+                        .WithMany()
+                        .HasForeignKey("ModelGenerationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ModelGeneration");
+                });
 
             modelBuilder.Entity("CarRental.Domain.Entities.ModelGeneration", b =>
-            {
-                b.HasOne("CarRental.Domain.Entities.CarModel", "Model")
-                    .WithMany()
-                    .HasForeignKey("ModelId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-                b.Navigation("Model");
-            });
+                {
+                    b.HasOne("CarRental.Domain.Entities.CarModel", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Model");
+                });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Rental", b =>
-            {
-                b.HasOne("CarRental.Domain.Entities.Car", "Car")
-                    .WithMany()
-                    .HasForeignKey("CarId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-                b.HasOne("CarRental.Domain.Entities.Client", "Client")
-                    .WithMany()
-                    .HasForeignKey("ClientId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-                b.Navigation("Car");
-                b.Navigation("Client");
-            });
+                {
+                    b.HasOne("CarRental.Domain.Entities.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarRental.Domain.Entities.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Client");
+                });
 #pragma warning restore 612, 618
         }
     }
