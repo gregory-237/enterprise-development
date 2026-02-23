@@ -6,13 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
-    <UserSecretsId>92a4f1d3-7b5e-4c8f-a2d1-e3f456789012</UserSecretsId>
+    <UserSecretsId>a7b3c9d1-2e4f-5a6b-8c0d-e1f234567890</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
-    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.3.1" />
+    <PackageReference Include="Aspire.Hosting.AppHost"    Version="9.3.1" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ"   Version="9.3.1" />
+    <PackageReference Include="Aspire.Hosting.SqlServer"  Version="9.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CarRental.API\CarRental.API.csproj" />
+    <ProjectReference Include="..\CarRental.Generator.Host\CarRental.Generator.Host.csproj" />
   </ItemGroup>
 </Project>

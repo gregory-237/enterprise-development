@@ -3,7 +3,7 @@
     "CarRental.AppHost": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
       "applicationUrl": "http://localhost:15058",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
